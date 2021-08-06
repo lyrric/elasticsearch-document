@@ -1,48 +1,12 @@
-<a name="ZtgJL"></a>
-# Elasticsearch是什么?
-Elasticseach在Elastic Stack中是一个分布式的搜索、分析引擎。Logstash和Beats收集、聚合和存储你的数据，使你的数据更有价值。Kibana提供交互式的界面供你浏览、可视化和共享对数据的见解，并管理和监控堆栈。Elasticsearch提供索引、搜索和分析功能。<br />​
+# Elasticsearch7.14文档
 
-Elasticsearch对于所有的数据类型提供了近乎实时的搜索和分析。无论你的数据是有有固定的结构的文本或是混乱的文本、数值类型的数据、地理类型的数据，Elasticsearch都可以有效的存储，并且用一种支持快速检索的方式来索引这些数据。你不仅可以简单地检索这些数据，还可以通过聚合数据的方式发现趋势和模型。随着数据和检索频率的增长，Elasticsearch的分布式特性可以使部署的服务随着一起增长。<br />​
+- Elasticsearch简介
+	- [数据存储：文档与索引](https://github.com/lyrric/elasticsearch-document/blob/main/Elasticsearch简介/文档和索引.md)
+	- 数据检索：搜索和分析
+	- 伸缩性和弹性
+- 7.14中的新特性
 
-不是所有的问题都是搜索问题，Elasticsearch提供了在各种用例中处理数据的速度和灵活性：
 
-- 搜索框
-- 存储的分析日志、指标、安全事件
-- 使用机器学习来自动模拟实时数据的行为
-- 自动化商业流使用Elasticsearch作为存储引擎
-- 在GIS（geographic information system）中使用Elasticsearch来管理、聚合、分析空间信息
-- 作为生物信息学的研究工具来存储和加工遗传基因数据
 
-​
 
-人们使用的各种各样新奇的搜索方式时常让我们觉得惊讶。但是无论你的场景是上面哪种，或者你用Elasticsearch来解决一个新的问题，你处理数据、文档和索引在的方式Elasticsearch中都是一样的。
-<a name="dzz0H"></a>
-## 文档和索引
-Elasticseach是一个分布式的文档存储数据库，现对于传统的关系型数据库，Elasticseach可以存储被json序列化的复杂的数据结构。如果你的Elasticsearch集群中有多个节点，那么文档会被存储在整个集群中，并且从任何一个节点访问。<br />​
-
-当一个文档被存储后，会被索引并且几乎实时（一秒内）就可以被检索到。Elasticseach用一种叫做倒排索引的数据结构来支持快速文本检索。一个倒排索引包含的是出现在所有文档中出现并且不重复的单词和那些文档中出现了这些单词。<br />​
-
-一个索引可以看做是一系列文档充分压缩的集合，每个文档可以看做是一系列字段的集合，也就是数据的key-value键值对。默认情况下，Elasticsearch会为文档的每个字段建立索引，每个索引字段都有一个专门的、特别优化的数据结构。例如，text类型字段用倒排索引存储，数值和geo字段类型用BKD trees存储。这种按每个字段的类型来使用不同的结构索引使得Elasticsearch搜索如此之快。<br />​
-
-Elasticsearch也支持（schema-less）无模式的能力，也就是说不需要显示的为文档的每个字段指定数据类型。如果开启了动态mapping，Elasticsearch会自动检测，索引新增的字段。这种默认的行为使的存储和检索数据更加简单-只需要保存文档，Elasticsearch会将文档value类型为boolean、float、integer、date、string的字段类型映射为Elasticsearch中接近的类型。<br />​
-
-最后，如果你比较了解你的文档数据，您可以定义规则来控制动态mapping，并显式定义mapping来控制字段的存储和索引方式。<br />​
-
-显示的定义mapping可以：
-
-- 区分value为字符串的字段是text（支持分词搜索）还是keyword类型
-- 指定词法解析器
-- 优化部分匹配的字段
-- 自定义日期格式
-- geo_point和geo_shape类型Elasticsearch无法自动映射
-
-​
-
-一般来说字段的用处不同，那么字段的设置也不同。例如，一个字符串类型的字段，你可能想用作全文搜索，同时也作为一个keyword类型来排序。又或者，选择多个词法解析器来处理用户输入文本的字段。<br />​
-
-分析链将在索引文档的时候作用于text字段，同时在搜索的时候也会别用到。当你进行全文搜索时，分析链会先对查询文本进行解析，然后再去搜索。
-<a name="lPsLP"></a>
-## 检索和分析
-
-<br />
 
